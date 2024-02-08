@@ -1,21 +1,25 @@
-f=open('students.csv')
-z1,z2,z3,z4,z5=f.readline().split(',') #считываем строку с заголовками
-tab=[] #это будет двухмерный список со всеми данными
-fio=[] #ФИО через пробел, а удобно работать по отдельности
+def readFile(filename):
+    ''' Чтение csv файла в список
+    param имя файла для чтения
+    return list of students
+    '''
+    f = open(filename, 'r', encoding = 'utf-8')
+    global z1,z2,z3,z4,z5
+    z1,z2,z3,z4,z5=f.readline().strip().split(',')
+    tab=[]
+    for i in range(500):
+        d1,d2,d3,d4,d5=f.readline().strip().split(',')
+        tab.append([d1,d2,d3,d4,d5]) 
+    return tab
 
-#создаем двухмерный список данных из файла:
-for i in range(500):
-    d1,d2,d3,d4,d5=f.readline().strip().split(',') #прочитали строку из файла, разбили
-    fio=d2.split() # разбили ФИО на фамилию, имя, отчество отдельно
-    # создаем двухмерный список с исходными данными
-    tab.append([d1,fio[0],fio[1],fio[2],d3,d4,d5]) 
-
-
+tab=readFile('students.csv')
 idproj=input()
 while idproj!="СТОП":
     for i in range(len(tab)):
+        fio=tab[i][1].split()
         if tab[i][4]==idproj:
-            print(f'Проект №{tab[i][4]} делал: {tab[i][2][0]}.{tab[i][1]} он(а) получил(а) оценку - {tab[i][6]}.')
+            
+            print(f'Проект №{tab[i][4]} делал: {fio[1][0]}.{fio[0]} он(а) получил(а) оценку - {tab[i][6]}.')
             break
     else:
         print('Ничего не найдено')
