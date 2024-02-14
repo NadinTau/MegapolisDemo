@@ -33,6 +33,16 @@ def repl():
         if students[i][4]=='0':
             students[i][4] = str(aver(students[i][3]))
 
+def findstudent(f,im):
+    '''
+    Find student project
+    param f: str, family
+    param i: str, name'''
+    for i in range(1,501):
+        fio1,fio2,fio3=students[i][1].split()
+        if fio1==f and fio2==im:
+            print(f'Ты получил: {students[i][4]}, за проект - {students[i][2]}')
+
 def writefile(name):
     '''
     Write new file with hash-key
@@ -45,6 +55,8 @@ def writefile(name):
     f.close()
 
 
-students=readfile('/home/teacher/Загрузки/students.csv')
+students=readfile('students.csv')
 repl()
-writefile('/home/teacher/Загрузки/student_new.csv')
+findstudent('Хадаров','Владимир')
+writefile('student_new.csv')
+
